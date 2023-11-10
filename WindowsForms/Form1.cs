@@ -12,11 +12,14 @@ namespace WindowsForms
 {
 	public partial class Form1 : Form
 	{
-		ContextMenuStrip ClockContextMenu = new ContextMenuStrip();
-		ToolStripMenuItem MenuDate = new ToolStripMenuItem("Show date");
-		ToolStripMenuItem MenuControls = new ToolStripMenuItem("Show controls");
-		ToolStripMenuItem MenuClose = new ToolStripMenuItem("Close");
+		static Mouse_tracking MT = new Mouse_tracking();
+		static ContextMenuStrip ClockContextMenu = new ContextMenuStrip();
+		static ToolStripMenuItem MenuDate = new ToolStripMenuItem("Show date");
+		static ToolStripMenuItem MenuControls = new ToolStripMenuItem("Show controls");
+		static ToolStripMenuItem MenuMouseTracking = new ToolStripMenuItem("Mouse Tracking");
+		static ToolStripMenuItem MenuClose = new ToolStripMenuItem("Close");
 		static bool call_context_menu = false;
+		static bool open_mouse_tracing = false;
 
 		public Form1()
 		{
@@ -29,6 +32,8 @@ namespace WindowsForms
 						new ToolStripSeparator(),
 						MenuControls,
 						new ToolStripSeparator(),
+						MenuMouseTracking,
+						new ToolStripSeparator(),
 						MenuClose
 					}
 				);
@@ -36,6 +41,7 @@ namespace WindowsForms
 			MenuDate.Click += MenuDate_Click;
 			MenuControls.Click += MenuControls_Click;
 			MenuClose.Click += MenuClose_Click;
+			MenuMouseTracking.Click += MenuMouseTrackng_Click;
 
 			this.Location = new Point(System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width * 3 / 4 - 25, 0);
 			label1.Text = DateTime.Now.ToString("HH:mm:ss");
@@ -46,7 +52,7 @@ namespace WindowsForms
 		private void timer1_Tick(object sender, EventArgs e)
 		{
 			label1.Text = DateTime.Now.ToString("HH:mm:ss");
-			if (cbShowDate.Checked)	label1.Text += $"\n{DateTime.Now.ToString("dd.MM.yyyy")}";
+			if (cbShowDate.Checked) label1.Text += $"\n{DateTime.Now.ToString("dd.MM.yyyy")}";
 			call_context_menu = false;
 		}
 		private void label1_DoubleClick(object sender, EventArgs e)
@@ -74,7 +80,7 @@ namespace WindowsForms
 		private void bHideControl_Click(object sender, EventArgs e)
 		{
 			if (!call_context_menu)
-			{				
+			{
 				if (MenuControls.Text == "Show controls") MenuControls.Text = "Hide controls";
 				else MenuControls.Text = "Show controls";
 				MenuUpdate();
@@ -88,7 +94,7 @@ namespace WindowsForms
 			this.bClose.Visible = false;
 		}
 
-		void MenuDate_Click(object sender, EventArgs e)
+		private void MenuDate_Click(object sender, EventArgs e)
 		{
 			call_context_menu = true;
 			if (MenuDate.Text == "Show date") MenuDate.Text = "Hide date";
@@ -105,12 +111,12 @@ namespace WindowsForms
 				label1.Text = DateTime.Now.ToString("HH:mm:ss");
 			}
 		}
-		void MenuControls_Click(object sender, EventArgs e)
+		private void MenuControls_Click(object sender, EventArgs e)
 		{
 			call_context_menu = true;
 			label1_DoubleClick(sender, e);
 		}
-		void MenuClose_Click(object sender, EventArgs e)
+		private void MenuClose_Click(object sender, EventArgs e)
 		{
 			this.Close();
 		}
@@ -140,9 +146,27 @@ namespace WindowsForms
 						new ToolStripSeparator(),
 						MenuControls,
 						new ToolStripSeparator(),
+						MenuMouseTracking,
+						new ToolStripSeparator(),
 						MenuClose
 					}
 				);
+		}
+		private void MenuMouseTrackng_Click(object sender, EventArgs e)
+		{
+			if (!open_mouse_tracing)
+			{
+				MenuControls_Click(sender, e);
+				open_mouse_tracing = true;
+				label1.Visible = false;
+				MT.Show();
+			}
+			else
+			{
+				open_mouse_tracing = false;
+				label1.Visible = true;
+				MT.Hide();
+			}
 		}
 	}
 }
