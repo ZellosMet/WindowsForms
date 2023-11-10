@@ -122,6 +122,7 @@ namespace WindowsForms
 		}
 		private void NotifyIconClock_MouseClick(object sender, MouseEventArgs e)
 		{
+			ClockContextMenu.TopLevel = true;
 			ClockContextMenu.Show(Cursor.Position);
 		}
 
