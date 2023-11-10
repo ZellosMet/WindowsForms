@@ -157,7 +157,7 @@ namespace WindowsForms
 		{
 			if (!open_mouse_tracing)
 			{
-				MenuControls_Click(sender, e);
+				bHideControl_Click(sender, e);
 				open_mouse_tracing = true;
 				label1.Visible = false;
 				MT.Show();
