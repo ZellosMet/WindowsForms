@@ -33,6 +33,9 @@
 			this.label1 = new System.Windows.Forms.Label();
 			this.timer1 = new System.Windows.Forms.Timer(this.components);
 			this.cbShowDate = new System.Windows.Forms.CheckBox();
+			this.bHideControl = new System.Windows.Forms.Button();
+			this.bClose = new System.Windows.Forms.Button();
+			this.NotifyIconClock = new System.Windows.Forms.NotifyIcon(this.components);
 			this.SuspendLayout();
 			// 
 			// label1
@@ -64,20 +67,54 @@
 			this.cbShowDate.Text = "Show date";
 			this.cbShowDate.UseVisualStyleBackColor = true;
 			this.cbShowDate.Visible = false;
+			this.cbShowDate.CheckedChanged += new System.EventHandler(this.cbShowDate_CheckedChanged);
+			// 
+			// bHideControl
+			// 
+			this.bHideControl.Location = new System.Drawing.Point(31, 316);
+			this.bHideControl.Name = "bHideControl";
+			this.bHideControl.Size = new System.Drawing.Size(215, 55);
+			this.bHideControl.TabIndex = 2;
+			this.bHideControl.Text = "Hide controls";
+			this.bHideControl.UseVisualStyleBackColor = true;
+			this.bHideControl.Visible = false;
+			this.bHideControl.Click += new System.EventHandler(this.bHideControl_Click);
+			// 
+			// bClose
+			// 
+			this.bClose.Location = new System.Drawing.Point(31, 390);
+			this.bClose.Name = "bClose";
+			this.bClose.Size = new System.Drawing.Size(215, 55);
+			this.bClose.TabIndex = 3;
+			this.bClose.Text = "Close";
+			this.bClose.UseVisualStyleBackColor = true;
+			this.bClose.Visible = false;
+			this.bClose.Click += new System.EventHandler(this.bClose_Click);
+			// 
+			// NotifyIconClock
+			// 
+			this.NotifyIconClock.Icon = ((System.Drawing.Icon)(resources.GetObject("NotifyIconClock.Icon")));
+			this.NotifyIconClock.Text = "Clock";
+			this.NotifyIconClock.Visible = true;
+			this.NotifyIconClock.MouseClick += new System.Windows.Forms.MouseEventHandler(this.NotifyIconClock_MouseClick);
 			// 
 			// Form1
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(771, 504);
+			this.BackColor = System.Drawing.Color.White;
+			this.ClientSize = new System.Drawing.Size(521, 504);
+			this.Controls.Add(this.bClose);
+			this.Controls.Add(this.bHideControl);
 			this.Controls.Add(this.cbShowDate);
 			this.Controls.Add(this.label1);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.Name = "Form1";
 			this.ShowInTaskbar = false;
+			this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
 			this.Text = "Clock";
-			this.TransparencyKey = System.Drawing.SystemColors.Control;
+			this.TransparencyKey = System.Drawing.Color.White;
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -88,6 +125,9 @@
 		private System.Windows.Forms.Label label1;
 		private System.Windows.Forms.Timer timer1;
 		private System.Windows.Forms.CheckBox cbShowDate;
+		private System.Windows.Forms.Button bHideControl;
+		private System.Windows.Forms.Button bClose;
+		private System.Windows.Forms.NotifyIcon NotifyIconClock;
 	}
 }
 
