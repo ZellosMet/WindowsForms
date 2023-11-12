@@ -36,6 +36,11 @@
 			this.bHideControl = new System.Windows.Forms.Button();
 			this.bClose = new System.Windows.Forms.Button();
 			this.NotifyIconClock = new System.Windows.Forms.NotifyIcon(this.components);
+			this.fontDialog1 = new System.Windows.Forms.FontDialog();
+			this.colorDialog1 = new System.Windows.Forms.ColorDialog();
+			this.btnSystemFonts = new System.Windows.Forms.Button();
+			this.btnCustomFonts = new System.Windows.Forms.Button();
+			this.btnBackColor = new System.Windows.Forms.Button();
 			this.SuspendLayout();
 			// 
 			// label1
@@ -98,12 +103,52 @@
 			this.NotifyIconClock.Visible = true;
 			this.NotifyIconClock.MouseClick += new System.Windows.Forms.MouseEventHandler(this.NotifyIconClock_MouseClick);
 			// 
+			// fontDialog1
+			// 
+			this.fontDialog1.ShowColor = true;
+			// 
+			// btnSystemFonts
+			// 
+			this.btnSystemFonts.Location = new System.Drawing.Point(290, 316);
+			this.btnSystemFonts.Name = "btnSystemFonts";
+			this.btnSystemFonts.Size = new System.Drawing.Size(206, 38);
+			this.btnSystemFonts.TabIndex = 4;
+			this.btnSystemFonts.Text = "System Fonts Settings";
+			this.btnSystemFonts.UseVisualStyleBackColor = true;
+			this.btnSystemFonts.Visible = false;
+			this.btnSystemFonts.Click += new System.EventHandler(this.btnSystemFonts_Click);
+			// 
+			// btnCustomFonts
+			// 
+			this.btnCustomFonts.Location = new System.Drawing.Point(290, 360);
+			this.btnCustomFonts.Name = "btnCustomFonts";
+			this.btnCustomFonts.Size = new System.Drawing.Size(206, 37);
+			this.btnCustomFonts.TabIndex = 5;
+			this.btnCustomFonts.Text = "Custom Fonts Settings";
+			this.btnCustomFonts.UseVisualStyleBackColor = true;
+			this.btnCustomFonts.Visible = false;
+			this.btnCustomFonts.Click += new System.EventHandler(this.btnCustomFonts_Click);
+			// 
+			// btnBackColor
+			// 
+			this.btnBackColor.Location = new System.Drawing.Point(290, 403);
+			this.btnBackColor.Name = "btnBackColor";
+			this.btnBackColor.Size = new System.Drawing.Size(206, 42);
+			this.btnBackColor.TabIndex = 6;
+			this.btnBackColor.Text = "Back Color Settings";
+			this.btnBackColor.UseVisualStyleBackColor = true;
+			this.btnBackColor.Visible = false;
+			this.btnBackColor.Click += new System.EventHandler(this.btnBackColor_Click);
+			// 
 			// Form1
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackColor = System.Drawing.Color.White;
 			this.ClientSize = new System.Drawing.Size(521, 504);
+			this.Controls.Add(this.btnBackColor);
+			this.Controls.Add(this.btnCustomFonts);
+			this.Controls.Add(this.btnSystemFonts);
 			this.Controls.Add(this.bClose);
 			this.Controls.Add(this.bHideControl);
 			this.Controls.Add(this.cbShowDate);
@@ -114,6 +159,7 @@
 			this.ShowInTaskbar = false;
 			this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
 			this.Text = "Clock";
+			this.TopMost = true;
 			this.TransparencyKey = System.Drawing.Color.White;
 			this.ResumeLayout(false);
 			this.PerformLayout();
@@ -128,6 +174,11 @@
 		private System.Windows.Forms.Button bHideControl;
 		private System.Windows.Forms.Button bClose;
 		private System.Windows.Forms.NotifyIcon NotifyIconClock;
+		private System.Windows.Forms.FontDialog fontDialog1;
+		private System.Windows.Forms.ColorDialog colorDialog1;
+		private System.Windows.Forms.Button btnSystemFonts;
+		private System.Windows.Forms.Button btnCustomFonts;
+		private System.Windows.Forms.Button btnBackColor;
 	}
 }
 
