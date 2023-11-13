@@ -49,11 +49,14 @@ namespace WindowsForms
 		public FontSettings(System.Windows.Forms.Label label, string font_directory)
 		{
 			InitializeComponent();
+			string namefont = label.Font.Name + ".ttf";
 			FontDirectory = font_directory;
 			SetFont = CurrentFont = label.Font;
 			SetForeColor = CurrentForeColor = label.ForeColor;
 			btnFontColor.BackColor = label.ForeColor;
 			LoadCustomFonts();
+			cbFontList.SelectedItem = namefont;
+
 		}
 		public void LoadCustomFonts()
 		{
