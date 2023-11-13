@@ -48,7 +48,7 @@
 			// 
 			this.timer_mouse.Enabled = true;
 			this.timer_mouse.Interval = 1000;
-			this.timer_mouse.Tick += new System.EventHandler(this.timer_mouse_Tick);
+			//is.timer_mouse.Tick += new System.EventHandler(this.timer_mouse_Tick);
 			// 
 			// Mouse_tracking
 			// 

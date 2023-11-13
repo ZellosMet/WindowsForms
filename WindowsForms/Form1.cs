@@ -37,7 +37,9 @@ namespace WindowsForms
 		static ToolStripMenuItem MenuCustomFontSettings = new ToolStripMenuItem("Custom font settings");
 		static ToolStripMenuItem MenuBackColor = new ToolStripMenuItem("Back color settings");
 		static ToolStripMenuItem MenuClose = new ToolStripMenuItem("Close");
-		static bool call_context_menu = false;
+		static bool control_visible = false;
+		static bool data_visible = false;
+		static bool click_datamenu = false;
 		static bool open_mouse_tracing = false;
 
 		public Form1()
@@ -85,12 +87,19 @@ namespace WindowsForms
 		{
 			label1.Text = DateTime.Now.ToString("HH:mm:ss");
 			if (cbShowDate.Checked) label1.Text += $"\n{DateTime.Now.ToString("dd.MM.yyyy")}";
-			call_context_menu = false;
 		}
 		private void label1_DoubleClick(object sender, EventArgs e)
 		{
-			if (MenuControls.Text == "Show controls") MenuControls.Text = "Hide controls";
-			else MenuControls.Text = "Show controls";
+			if (!control_visible)
+			{
+				control_visible = true;
+				MenuControls.Text = "Hide controls";
+			}
+			else 
+			{
+				control_visible = false;
+				MenuControls.Text = "Show controls";
+			}
 			MenuUpdate();
 			if (!this.ShowInTaskbar)
 			{
@@ -104,7 +113,18 @@ namespace WindowsForms
 				this.btnCustomFonts.Visible = true;
 				this.btnBackColor.Visible = true;
 			}
-			else this.bHideControl_Click(sender, e);
+			else
+			{
+				this.bHideControl.Visible = false;
+				this.FormBorderStyle = FormBorderStyle.None;
+				this.TransparencyKey = Color.White;
+				this.ShowInTaskbar = false;
+				this.cbShowDate.Visible = false;
+				this.bClose.Visible = false;
+				this.btnSystemFonts.Visible = false;
+				this.btnCustomFonts.Visible = false;
+				this.btnBackColor.Visible = false;
+			}
 		}
 
 		private void bClose_Click(object sender, EventArgs e)
@@ -114,29 +134,22 @@ namespace WindowsForms
 
 		private void bHideControl_Click(object sender, EventArgs e)
 		{
-			if (!call_context_menu)
-			{
-				if (MenuControls.Text == "Show controls") MenuControls.Text = "Hide controls";
-				else MenuControls.Text = "Show controls";
-				MenuUpdate();
-			}
-			else call_context_menu = false;
-			this.bHideControl.Visible = false;
-			this.FormBorderStyle = FormBorderStyle.None;
-			this.TransparencyKey = Color.White;
-			this.ShowInTaskbar = false;
-			this.cbShowDate.Visible = false;
-			this.bClose.Visible = false;
-			this.btnSystemFonts.Visible = false;
-			this.btnCustomFonts.Visible = false;
-			this.btnBackColor.Visible = false;
+			label1_DoubleClick(sender, e);
 		}
 
 		private void MenuDate_Click(object sender, EventArgs e)
 		{
-			call_context_menu = true;
-			if (MenuDate.Text == "Show date") MenuDate.Text = "Hide date";
-			else MenuDate.Text = "Show date";
+			click_datamenu = true;
+			if (!data_visible)
+			{
+				data_visible = true;
+				MenuDate.Text = "Hide date";
+			}
+			else
+			{
+				data_visible = false;
+				MenuDate.Text = "Show date";
+			}
 			MenuUpdate();
 			if (!cbShowDate.Checked)
 			{
@@ -151,7 +164,6 @@ namespace WindowsForms
 		}
 		private void MenuControls_Click(object sender, EventArgs e)
 		{
-			call_context_menu = true;
 			label1_DoubleClick(sender, e);
 		}
 		private void MenuClose_Click(object sender, EventArgs e)
@@ -166,13 +178,21 @@ namespace WindowsForms
 
 		private void cbShowDate_CheckedChanged(object sender, EventArgs e)
 		{
-			if (!call_context_menu)
+			if (click_datamenu)	click_datamenu = false;
+			else 
 			{
-				if (MenuDate.Text == "Show date") MenuDate.Text = "Hide date";
-				else MenuDate.Text = "Show date";
+				if (!data_visible)
+				{
+					data_visible = true;
+					MenuDate.Text = "Hide date";
+				}
+				else
+				{
+					data_visible = false;
+					MenuDate.Text = "Show date";
+				}
 				MenuUpdate();
 			}
-			else call_context_menu = false;
 		}
 		private void MenuUpdate()
 		{

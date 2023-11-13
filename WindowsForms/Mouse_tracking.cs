@@ -28,11 +28,10 @@ namespace WindowsForms
 		{
 			Move();
 		}
-
-		private void timer_mouse_Tick(object sender, EventArgs e)
-		{
-			label_clock.Text = DateTime.Now.ToString("HH:mm:ss");
-		}
+		//private void timer_mouse_Tick(object sender, EventArgs e)
+		//{
+		//	label_clock.Text = DateTime.Now.ToString("HH:mm:ss");
+		//}
 		void Move()
 		{
 			this.Left = Cursor.Position.X + 10;
