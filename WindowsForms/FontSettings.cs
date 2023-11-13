@@ -58,7 +58,6 @@ namespace WindowsForms
 		public void LoadCustomFonts()
 		{
 			Directory.SetCurrentDirectory(FontDirectory);
-			Directory.SetCurrentDirectory(FontDirectory);
 			string[] fonts = Directory.GetFiles(FontDirectory, "*.ttf");
 			for (int i = 0; i < fonts.Length; i++)
 			{
