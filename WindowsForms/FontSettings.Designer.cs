@@ -34,6 +34,8 @@
 			this.btnClose = new System.Windows.Forms.Button();
 			this.colorDialog1 = new System.Windows.Forms.ColorDialog();
 			this.btnFontColor = new System.Windows.Forms.Button();
+			this.nudFontSize = new System.Windows.Forms.NumericUpDown();
+			((System.ComponentModel.ISupportInitialize)(this.nudFontSize)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// cbFontList
@@ -49,7 +51,7 @@
 			// 
 			this.LFontExample.AutoSize = true;
 			this.LFontExample.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-			this.LFontExample.Location = new System.Drawing.Point(9, 96);
+			this.LFontExample.Location = new System.Drawing.Point(12, 134);
 			this.LFontExample.Name = "LFontExample";
 			this.LFontExample.Size = new System.Drawing.Size(105, 18);
 			this.LFontExample.TabIndex = 1;
@@ -57,7 +59,7 @@
 			// 
 			// btnOK
 			// 
-			this.btnOK.Location = new System.Drawing.Point(353, 192);
+			this.btnOK.Location = new System.Drawing.Point(353, 316);
 			this.btnOK.Name = "btnOK";
 			this.btnOK.Size = new System.Drawing.Size(125, 45);
 			this.btnOK.TabIndex = 3;
@@ -67,7 +69,7 @@
 			// 
 			// btnClose
 			// 
-			this.btnClose.Location = new System.Drawing.Point(12, 192);
+			this.btnClose.Location = new System.Drawing.Point(12, 316);
 			this.btnClose.Name = "btnClose";
 			this.btnClose.Size = new System.Drawing.Size(125, 45);
 			this.btnClose.TabIndex = 4;
@@ -84,11 +86,20 @@
 			this.btnFontColor.UseVisualStyleBackColor = true;
 			this.btnFontColor.Click += new System.EventHandler(this.FontColor_Click);
 			// 
+			// nudFontSize
+			// 
+			this.nudFontSize.Location = new System.Drawing.Point(403, 62);
+			this.nudFontSize.Name = "nudFontSize";
+			this.nudFontSize.Size = new System.Drawing.Size(75, 22);
+			this.nudFontSize.TabIndex = 6;
+			this.nudFontSize.ValueChanged += new System.EventHandler(this.nudFontSize_ValueChanged);
+			// 
 			// FontSettings
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(490, 249);
+			this.ClientSize = new System.Drawing.Size(499, 373);
+			this.Controls.Add(this.nudFontSize);
 			this.Controls.Add(this.btnFontColor);
 			this.Controls.Add(this.btnClose);
 			this.Controls.Add(this.btnOK);
@@ -96,6 +107,8 @@
 			this.Controls.Add(this.cbFontList);
 			this.Name = "FontSettings";
 			this.Text = "FontSettings";
+			this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FontSettings_FormClosed);
+			((System.ComponentModel.ISupportInitialize)(this.nudFontSize)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -109,5 +122,6 @@
 		private System.Windows.Forms.Button btnClose;
 		private System.Windows.Forms.ColorDialog colorDialog1;
 		private System.Windows.Forms.Button btnFontColor;
+		private System.Windows.Forms.NumericUpDown nudFontSize;
 	}
 }

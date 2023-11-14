@@ -41,6 +41,7 @@
 			this.btnSystemFonts = new System.Windows.Forms.Button();
 			this.btnCustomFonts = new System.Windows.Forms.Button();
 			this.btnBackColor = new System.Windows.Forms.Button();
+			this.ClockContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.SuspendLayout();
 			// 
 			// label1
@@ -140,6 +141,12 @@
 			this.btnBackColor.Visible = false;
 			this.btnBackColor.Click += new System.EventHandler(this.btnBackColor_Click);
 			// 
+			// ClockContextMenu
+			// 
+			this.ClockContextMenu.ImageScalingSize = new System.Drawing.Size(20, 20);
+			this.ClockContextMenu.Name = "contextMenuStrip1";
+			this.ClockContextMenu.Size = new System.Drawing.Size(211, 32);
+			// 
 			// Form1
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -179,6 +186,7 @@
 		private System.Windows.Forms.Button btnSystemFonts;
 		private System.Windows.Forms.Button btnCustomFonts;
 		private System.Windows.Forms.Button btnBackColor;
+		private System.Windows.Forms.ContextMenuStrip ClockContextMenu;
 	}
 }
 

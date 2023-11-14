@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows;
 using System.IO;
+using System.Drawing.Text;
 
 namespace WindowsForms
 {
@@ -15,6 +16,7 @@ namespace WindowsForms
 	{
 		private string[] fonts_list;
 		private string font_directory_path;
+		int index;
 
 		public string FontDirectoryPath
 		{
@@ -27,9 +29,10 @@ namespace WindowsForms
 			set { fonts_list = value; }
 		}
 
+		PrivateFontCollection MainPFC = new PrivateFontCollection();
 		static Font current_font;
 		static Mouse_tracking MT = new Mouse_tracking();
-		static ContextMenuStrip ClockContextMenu = new ContextMenuStrip();
+		//static ContextMenuStrip ClockContextMenu = new ContextMenuStrip();
 		static ToolStripMenuItem MenuDate = new ToolStripMenuItem("Show date");
 		static ToolStripMenuItem MenuControls = new ToolStripMenuItem("Show controls");
 		static ToolStripMenuItem MenuMouseTracking = new ToolStripMenuItem("Mouse tracking");
@@ -80,7 +83,9 @@ namespace WindowsForms
 
 			this.NotifyIconClock.Visible = true;
 
-			SetFontDirectory();
+			current_font = label1.Font;
+
+			LoadFonts();
 		}
 
 		private void timer1_Tick(object sender, EventArgs e)
@@ -240,11 +245,11 @@ namespace WindowsForms
 		}
 		private void MenuCustomFontSettings_Click(object sender, EventArgs e)
 		{
-			FontSettings FS = new FontSettings(label1, FontDirectoryPath);
+			FontSettings FS = new FontSettings(label1, index, FontDirectoryPath);
 			FS.ShowDialog(this);
-			current_font = new Font(FS.CurrentFont.FontFamily, 48);
-			label1.Font = current_font;
-			label1.ForeColor = FS.CurrentForeColor;
+			label1.Font = new Font(FS.SetFont.FontFamily, FS.SetFontSize);
+			label1.ForeColor = FS.SetForeColor;
+			index = FS.Index;
 		}
 		private void MenuBackColor_Click(object sender, EventArgs e)
 		{
@@ -263,7 +268,7 @@ namespace WindowsForms
 		{
 			MenuBackColor_Click(sender, e);
 		}
-		private void SetFontDirectory()
+		private void LoadFonts()
 		{
 			string DirectoryFonts = System.IO.Directory.GetCurrentDirectory();
 			string[] DirectoryItems = DirectoryFonts.Split('\\');
@@ -277,6 +282,8 @@ namespace WindowsForms
 			newDirectory += "CustomFonts";
 			FontsList = Directory.GetFiles(newDirectory);
 			FontDirectoryPath = newDirectory;
+			foreach(string i in FontsList)
+			MainPFC.AddFontFile(i);
 		}
 	}
 }
