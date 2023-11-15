@@ -106,6 +106,7 @@
 			this.Controls.Add(this.LFontExample);
 			this.Controls.Add(this.cbFontList);
 			this.Name = "FontSettings";
+			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
 			this.Text = "FontSettings";
 			this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FontSettings_FormClosed);
 			((System.ComponentModel.ISupportInitialize)(this.nudFontSize)).EndInit();
