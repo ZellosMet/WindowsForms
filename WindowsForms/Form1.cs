@@ -16,7 +16,7 @@ namespace WindowsForms
 	{
 		private string[] fonts_list;
 		private string font_directory_path;
-		int index;
+		int index = 0;
 
 		public string FontDirectoryPath
 		{
@@ -29,10 +29,10 @@ namespace WindowsForms
 			set { fonts_list = value; }
 		}
 
+		FontSettings FS;
 		PrivateFontCollection MainPFC = new PrivateFontCollection();
 		static Font current_font;
 		static Mouse_tracking MT = new Mouse_tracking();
-		//static ContextMenuStrip ClockContextMenu = new ContextMenuStrip();
 		static ToolStripMenuItem MenuDate = new ToolStripMenuItem("Show date");
 		static ToolStripMenuItem MenuControls = new ToolStripMenuItem("Show controls");
 		static ToolStripMenuItem MenuMouseTracking = new ToolStripMenuItem("Mouse tracking");
@@ -86,6 +86,7 @@ namespace WindowsForms
 			current_font = label1.Font;
 
 			LoadFonts();
+			FS = new FontSettings(label1, index, FontDirectoryPath);
 		}
 
 		private void timer1_Tick(object sender, EventArgs e)
@@ -245,7 +246,6 @@ namespace WindowsForms
 		}
 		private void MenuCustomFontSettings_Click(object sender, EventArgs e)
 		{
-			FontSettings FS = new FontSettings(label1, index, FontDirectoryPath);
 			FS.ShowDialog(this);
 			label1.Font = new Font(FS.SetFont.FontFamily, FS.SetFontSize);
 			label1.ForeColor = FS.SetForeColor;

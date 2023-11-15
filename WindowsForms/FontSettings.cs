@@ -21,7 +21,7 @@ namespace WindowsForms
 		private Color set_fore_color;
 		private Color current_fore_color;
 		private string font_directory_path;
-		private string[] fonts_list;		
+		private string[] fonts_list;
 		public int CurrentFontSize { get; set; }
 		public int SetFontSize { get; set; }
 		public int Index { get; set; }
@@ -122,8 +122,8 @@ namespace WindowsForms
 
 		private void nudFontSize_ValueChanged(object sender, EventArgs e)
 		{
-				CurrentFontSize = (int)nudFontSize.Value;
-				LFontExample.Font = new Font(LFontExample.Font.FontFamily, (int)nudFontSize.Value);
+			CurrentFontSize = (int)nudFontSize.Value;
+			LFontExample.Font = new Font(LFontExample.Font.FontFamily, (int)nudFontSize.Value);
 		}
 	}
 }
