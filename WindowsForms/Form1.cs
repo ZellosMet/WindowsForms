@@ -9,29 +9,21 @@ using System.Windows.Forms;
 using System.Windows;
 using System.IO;
 using System.Drawing.Text;
+using System.Reflection;
 
 namespace WindowsForms
 {
 	public partial class Form1 : Form
 	{
-		private string[] fonts_list;
-		private string font_directory_path;
-		int index = 0;
-
-		public string FontDirectoryPath
-		{
-			get { return font_directory_path; }
-			set { font_directory_path = value; }
-		}
-		public string[] FontsList
-		{
-			get { return fonts_list; }
-			set { fonts_list = value; }
-		}
+		int CBIndex { get; set; }
+		public string FontDirectoryPath { get; set; }
+		public string[] FontsList { get; set; }
+		public Font CurrentFont { get; set; }
+		public Color BackColorLabel { get; set; }
+		public Color CurrentForeColor { get; set; }
 
 		FontSettings FS;
 		PrivateFontCollection MainPFC = new PrivateFontCollection();
-		static Font current_font;
 		static Mouse_tracking MT = new Mouse_tracking();
 		static ToolStripMenuItem MenuDate = new ToolStripMenuItem("Show date");
 		static ToolStripMenuItem MenuControls = new ToolStripMenuItem("Show controls");
@@ -48,6 +40,15 @@ namespace WindowsForms
 		public Form1()
 		{
 			InitializeComponent();
+			CurrentFont = Properties.Settings.Default.CurrentFont;
+			CurrentForeColor = Properties.Settings.Default.CurrentForeColor;
+			BackColorLabel = Properties.Settings.Default.BackColorLabel;
+
+			label1.Font = Properties.Settings.Default.CurrentFont;
+			label1.BackColor = Properties.Settings.Default.BackColorLabel;
+			label1.ForeColor = Properties.Settings.Default.CurrentForeColor;
+
+
 			ClockContextMenu.Items.AddRange
 				(
 				new ToolStripItem[]
@@ -66,6 +67,7 @@ namespace WindowsForms
 					}
 				);
 
+			CBIndex = 0;
 			NotifyIconClock.ContextMenuStrip = ClockContextMenu;
 			this.ContextMenuStrip = ClockContextMenu;
 			label1.ContextMenuStrip = ClockContextMenu;
@@ -83,14 +85,15 @@ namespace WindowsForms
 
 			this.NotifyIconClock.Visible = true;
 
-			current_font = label1.Font;
+			CurrentFont = label1.Font;
 
 			LoadFonts();
-			FS = new FontSettings(label1, index, FontDirectoryPath);
+			FS = new FontSettings(label1, CBIndex, FontDirectoryPath);
 		}
 
 		private void timer1_Tick(object sender, EventArgs e)
 		{
+			label1.Font = CurrentFont;
 			label1.Text = DateTime.Now.ToString("HH:mm:ss");
 			if (cbShowDate.Checked) label1.Text += $"\n{DateTime.Now.ToString("dd.MM.yyyy")}";
 		}
@@ -174,6 +177,10 @@ namespace WindowsForms
 		}
 		private void MenuClose_Click(object sender, EventArgs e)
 		{
+			Properties.Settings.Default.BackColorLabel = BackColorLabel;
+			Properties.Settings.Default.CurrentFont = CurrentFont;
+			Properties.Settings.Default.CurrentForeColor = CurrentForeColor;
+			Properties.Settings.Default.Save();
 			this.Close();
 		}
 		private void NotifyIconClock_MouseClick(object sender, MouseEventArgs e)
@@ -240,21 +247,26 @@ namespace WindowsForms
 		private void MenuSystemFontSettings_Click(object sender, EventArgs e)
 		{
 			if (fontDialog1.ShowDialog() == DialogResult.Cancel)return;
-			current_font = new Font(fontDialog1.Font.FontFamily, 48);
-			label1.Font = current_font;
-			label1.ForeColor = fontDialog1.Color;
+			CurrentFont = fontDialog1.Font;
+			CurrentForeColor = fontDialog1.Color;
+			label1.Font = new Font(CurrentFont.FontFamily, CurrentFont.Size);
+			label1.ForeColor = CurrentForeColor;
+			label1.BackColor = BackColorLabel;
 		}
 		private void MenuCustomFontSettings_Click(object sender, EventArgs e)
 		{
 			FS.ShowDialog(this);
-			label1.Font = new Font(FS.SetFont.FontFamily, FS.SetFontSize);
+			CurrentFont = FS.SetFont;
+			label1.Font = new Font(CurrentFont.FontFamily, CurrentFont.Size);
 			label1.ForeColor = FS.SetForeColor;
-			index = FS.Index;
+			CBIndex = FS.Index;
 		}
 		private void MenuBackColor_Click(object sender, EventArgs e)
 		{
 			if (colorDialog1.ShowDialog() == DialogResult.Cancel) return;
+			BackColorLabel = colorDialog1.Color;
 			label1.BackColor = colorDialog1.Color;
+
 		}
 		private void btnSystemFonts_Click(object sender, EventArgs e)
 		{

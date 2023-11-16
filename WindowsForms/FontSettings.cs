@@ -84,7 +84,6 @@ namespace WindowsForms
 			foreach (string i in FontsList)
 				PFC.AddFontFile(i);
 		}
-
 		private void cbFont_SelectionChangeCommitted(object sender, EventArgs e)
 		{
 			PrivateFontCollection setPFC = new PrivateFontCollection();
@@ -94,7 +93,6 @@ namespace WindowsForms
 			LFontExample.Font = CurrentFont;
 			Index = cbFontList.SelectedIndex;
 		}
-
 		private void btnOK_Click(object sender, EventArgs e)
 		{
 			SetFont = CurrentFont;
@@ -102,12 +100,10 @@ namespace WindowsForms
 			SetFontSize = CurrentFontSize;
 			this.Close();
 		}
-
 		private void btnClose_Click(object sender, EventArgs e)
 		{
 			this.Close();
 		}
-
 		private void FontColor_Click(object sender, EventArgs e)
 		{
 			if (colorDialog1.ShowDialog() == DialogResult.Cancel) return;
@@ -115,11 +111,6 @@ namespace WindowsForms
 			btnFontColor.BackColor = colorDialog1.Color;
 			LFontExample.ForeColor = colorDialog1.Color;
 		}
-		private void FontSettings_FormClosed(object sender, FormClosedEventArgs e)
-		{
-			btnClose_Click(sender, e);
-		}
-
 		private void nudFontSize_ValueChanged(object sender, EventArgs e)
 		{
 			CurrentFontSize = (int)nudFontSize.Value;
