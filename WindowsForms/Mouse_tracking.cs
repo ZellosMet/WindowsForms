@@ -12,9 +12,12 @@ namespace WindowsForms
 {
 	public partial class Mouse_tracking : Form
 	{
-		public Mouse_tracking()
+		public Mouse_tracking(System.Windows.Forms.Label label)
 		{
 			InitializeComponent();
+			label_clock.Font = new Font(label.Font.FontFamily, 12);
+			label_clock.ForeColor = label.ForeColor;
+			label_clock.BackColor = label.BackColor;
 			System.Timers.Timer tm = new System.Timers.Timer();
 			tm.Interval = 2;
 			tm.Elapsed += TmElapse;
@@ -28,10 +31,6 @@ namespace WindowsForms
 		{
 			Move();
 		}
-		//private void timer_mouse_Tick(object sender, EventArgs e)
-		//{
-		//	label_clock.Text = DateTime.Now.ToString("HH:mm:ss");
-		//}
 		void Move()
 		{
 			this.Left = Cursor.Position.X + 10;

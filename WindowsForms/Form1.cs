@@ -24,7 +24,8 @@ namespace WindowsForms
 
 		FontSettings FS;
 		PrivateFontCollection MainPFC = new PrivateFontCollection();
-		static Mouse_tracking MT = new Mouse_tracking();
+		static Mouse_tracking MT;
+		static ContextMenuStrip ClockContextMenu = new ContextMenuStrip();
 		static ToolStripMenuItem MenuDate = new ToolStripMenuItem("Show date");
 		static ToolStripMenuItem MenuControls = new ToolStripMenuItem("Show controls");
 		static ToolStripMenuItem MenuMouseTracking = new ToolStripMenuItem("Mouse tracking");
@@ -48,7 +49,6 @@ namespace WindowsForms
 			label1.BackColor = Properties.Settings.Default.BackColorLabel;
 			label1.ForeColor = Properties.Settings.Default.CurrentForeColor;
 
-
 			ClockContextMenu.Items.AddRange
 				(
 				new ToolStripItem[]
@@ -67,7 +67,6 @@ namespace WindowsForms
 					}
 				);
 
-			CBIndex = 0;
 			NotifyIconClock.ContextMenuStrip = ClockContextMenu;
 			this.ContextMenuStrip = ClockContextMenu;
 			label1.ContextMenuStrip = ClockContextMenu;
@@ -80,6 +79,7 @@ namespace WindowsForms
 			MenuBackColor.Click += MenuBackColor_Click;
 			MenuClose.Click += MenuClose_Click;
 
+			CBIndex = 0;
 			this.Location = new Point(System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width * 3 / 4 - 25, 0);
 			label1.Text = DateTime.Now.ToString("HH:mm:ss");
 
@@ -89,6 +89,7 @@ namespace WindowsForms
 
 			LoadFonts();
 			FS = new FontSettings(label1, CBIndex, FontDirectoryPath);
+			MT = new Mouse_tracking(label1);
 		}
 
 		private void timer1_Tick(object sender, EventArgs e)
@@ -232,10 +233,11 @@ namespace WindowsForms
 		{
 			if (!open_mouse_tracing)
 			{
-				bHideControl_Click(sender, e);
 				open_mouse_tracing = true;
 				label1.Visible = false;
 				MT.Show();
+				if (!control_visible) return;
+				bHideControl_Click(sender, e);
 			}
 			else
 			{
