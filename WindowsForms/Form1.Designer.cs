@@ -145,7 +145,7 @@
 			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackColor = System.Drawing.Color.White;
-			this.ClientSize = new System.Drawing.Size(521, 504);
+			this.ClientSize = new System.Drawing.Size(541, 473);
 			this.Controls.Add(this.btnBackColor);
 			this.Controls.Add(this.btnCustomFonts);
 			this.Controls.Add(this.btnSystemFonts);

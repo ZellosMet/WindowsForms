@@ -91,7 +91,6 @@ namespace WindowsForms
 			FS = new FontSettings(label1, CBIndex, FontDirectoryPath);
 			MT = new Mouse_tracking(label1);
 		}
-
 		private void timer1_Tick(object sender, EventArgs e)
 		{
 			label1.Font = CurrentFont;
@@ -298,6 +297,11 @@ namespace WindowsForms
 			FontDirectoryPath = newDirectory;
 			foreach(string i in FontsList)
 			MainPFC.AddFontFile(i);
+		}
+
+		private void Form1_FormClosed(object sender, FormClosedEventArgs e)
+		{
+
 		}
 	}
 }
